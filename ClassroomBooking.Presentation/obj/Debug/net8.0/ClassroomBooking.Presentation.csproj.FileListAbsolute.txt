@@ -97,3 +97,4 @@ D:\Bai tap PRN222\ClassroomBookingSolution\ClassroomBooking.Presentation\obj\Deb
 D:\Bai tap PRN222\ClassroomBookingSolution\ClassroomBooking.Presentation\obj\Debug\net8.0\Classroo.2C11884F.Up2Date
 D:\Bai tap PRN222\ClassroomBookingSolution\ClassroomBooking.Presentation\obj\Debug\net8.0\ClassroomBooking.Presentation.genruntimeconfig.cache
 D:\Bai tap PRN222\ClassroomBookingSolution\ClassroomBooking.Presentation\obj\Debug\net8.0\ref\ClassroomBooking.Presentation.dll
+D:\Bai tap PRN222\ClassroomBookingSolution\ClassroomBooking.Presentation\obj\Debug\net8.0\ClassroomBooking.Presentation.sourcelink.json

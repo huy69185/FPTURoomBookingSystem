@@ -13,3 +13,4 @@ D:\Bai tap PRN222\ClassroomBookingSolution\ClassroomBooking.Service\obj\Debug\ne
 D:\Bai tap PRN222\ClassroomBookingSolution\ClassroomBooking.Service\obj\Debug\net8.0\refint\ClassroomBooking.Service.dll
 D:\Bai tap PRN222\ClassroomBookingSolution\ClassroomBooking.Service\obj\Debug\net8.0\ClassroomBooking.Service.pdb
 D:\Bai tap PRN222\ClassroomBookingSolution\ClassroomBooking.Service\obj\Debug\net8.0\ref\ClassroomBooking.Service.dll
+D:\Bai tap PRN222\ClassroomBookingSolution\ClassroomBooking.Service\obj\Debug\net8.0\ClassroomBooking.Service.sourcelink.json

@@ -29,8 +29,10 @@ namespace ClassroomBooking.Presentation.Pages.Account
 
             try
             {
-                // Gọi Service đăng ký
+                // Role sẽ auto set = 2 bên Service
+                // Campus lấy từ select
                 await _studentService.RegisterStudentAsync(StudentModel);
+
                 return RedirectToPage("/Account/Login");
             }
             catch (Exception ex)
