@@ -32,10 +32,21 @@ namespace ClassroomBooking.Presentation.Pages.Account
                     LoginVM.StudentCode,
                     LoginVM.Password);
 
-                // Đăng nhập thành công => Lưu session
+                // Lưu session
                 HttpContext.Session.SetString("StudentCode", student.StudentCode);
+                HttpContext.Session.SetInt32("Role", student.Role);
 
-                return RedirectToPage("/Index");
+                // Kiểm tra Role
+                if (student.Role == 1)
+                {
+                    // Role = 1 => Admin
+                    return RedirectToPage("/Admin/Index"); // ví dụ trang Admin
+                }
+                else
+                {
+                    // Role = 2 => Học sinh
+                    return RedirectToPage("/Index");
+                }
             }
             catch (Exception ex)
             {

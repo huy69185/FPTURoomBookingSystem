@@ -13,7 +13,8 @@ public partial class Students
 
     public string PhoneNumber { get; set; } = null!;
 
-    public string? Department { get; set; }
+    public string? Campus { get; set; }
     public string Password { get; set; }
+    public int Role {  get; set; }
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 }

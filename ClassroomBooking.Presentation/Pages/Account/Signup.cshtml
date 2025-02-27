@@ -26,6 +26,19 @@
         <label>Password:</label>
         <input type="password" asp-for="StudentModel.Password" />
     </div>
+
+    <!-- Chọn Campus trong 5 tùy chọn -->
+    <div>
+        <label>Campus:</label>
+        <select asp-for="StudentModel.Campus">
+            <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+            <option value="Cần Thơ">Cần Thơ</option>
+            <option value="Hòa Lạc">Hòa Lạc</option>
+            <option value="Hà Nội">Hà Nội</option>
+            <option value="Quy Nhơn">Quy Nhơn</option>
+        </select>
+    </div>
+
     <button type="submit">Sign Up</button>
 </form>
 

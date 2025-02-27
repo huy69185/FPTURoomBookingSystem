@@ -66,10 +66,12 @@ public partial class ClassroomBookingDbContext : DbContext
             entity.HasKey(e => e.StudentCode).HasName("PK__Students__1FC8860549C5A5AF");
 
             entity.Property(e => e.StudentCode).HasMaxLength(20);
-            entity.Property(e => e.Department).HasMaxLength(100);
+            entity.Property(e => e.Password).HasMaxLength(20);
+            entity.Property(e => e.Campus).HasMaxLength(100);
             entity.Property(e => e.Email).HasMaxLength(100);
             entity.Property(e => e.FullName).HasMaxLength(100);
             entity.Property(e => e.PhoneNumber).HasMaxLength(20);
+            entity.Property(e => e.Role).HasMaxLength(20);
         });
 
         OnModelCreatingPartial(modelBuilder);

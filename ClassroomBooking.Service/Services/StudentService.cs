@@ -18,37 +18,24 @@ namespace ClassroomBooking.Service.Services
             _studentRepo = studentRepo;
         }
 
-        /// <summary>
-        /// Lấy thông tin Student theo StudentCode
-        /// </summary>
         public async Task<Students?> GetStudentAsync(string studentCode)
         {
             return await _studentRepo.GetByCodeAsync(studentCode);
         }
 
-        /// <summary>
-        /// Đăng ký student mới
-        /// - Kiểm tra StudentCode đã tồn tại chưa
-        /// - Lưu student vào DB
-        /// </summary>
         public async Task RegisterStudentAsync(Students student)
         {
-            // Kiểm tra trùng mã
             var existed = await _studentRepo.GetByCodeAsync(student.StudentCode);
             if (existed != null)
                 throw new Exception("StudentCode already exists!");
 
-            // Ở đây, bạn có thể hash Password nếu muốn.
-            //  student.Password = HashPassword(student.Password);
+            // Tự động set Role = 2 (mặc định Học sinh)
+            student.Role = 2;
 
-            // Thêm mới
+            // Lưu student
             await _studentRepo.CreateAsync(student);
         }
 
-        /// <summary>
-        /// Đăng nhập bằng StudentCode + Password 
-        /// Throw Exception nếu không hợp lệ
-        /// </summary>
         public async Task<Students> LoginAsync(string studentCode, string password)
         {
             var student = await _studentRepo.GetByCodeAsync(studentCode);
@@ -56,25 +43,18 @@ namespace ClassroomBooking.Service.Services
             {
                 throw new Exception("Student not found!");
             }
-
-            // Ở đây, nếu bạn lưu hashed password, 
-            //  bạn cần so sánh Hash của password nhập vào với student.PasswordHash trong DB.
             if (student.Password != password)
             {
                 throw new Exception("Invalid password!");
             }
 
-            // Đăng nhập thành công => Trả về entity
+            // Đăng nhập thành công
             return student;
         }
 
-        /// <summary>
-        /// Đăng xuất (nếu Service cần xóa token/refresh token trong DB, 
-        /// thì xử lý, còn không thì bỏ trống)
-        /// </summary>
         public Task LogoutAsync()
         {
-            // Ví dụ: nếu bạn không lưu Session/Token trong DB thì không cần làm gì.
+            // Hiện tại không lưu token/phiên ở DB, nên để trống
             return Task.CompletedTask;
         }
     }
