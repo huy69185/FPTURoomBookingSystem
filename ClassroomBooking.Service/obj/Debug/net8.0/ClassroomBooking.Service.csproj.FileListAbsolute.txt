@@ -1,0 +1,15 @@
+D:\Bai tap PRN222\ClassroomBookingSolution\ClassroomBooking.Service\bin\Debug\net8.0\ClassroomBooking.Service.deps.json
+D:\Bai tap PRN222\ClassroomBookingSolution\ClassroomBooking.Service\bin\Debug\net8.0\ClassroomBooking.Service.dll
+D:\Bai tap PRN222\ClassroomBookingSolution\ClassroomBooking.Service\bin\Debug\net8.0\ClassroomBooking.Service.pdb
+D:\Bai tap PRN222\ClassroomBookingSolution\ClassroomBooking.Service\bin\Debug\net8.0\ClassroomBooking.Repository.dll
+D:\Bai tap PRN222\ClassroomBookingSolution\ClassroomBooking.Service\bin\Debug\net8.0\ClassroomBooking.Repository.pdb
+D:\Bai tap PRN222\ClassroomBookingSolution\ClassroomBooking.Service\obj\Debug\net8.0\ClassroomBooking.Service.csproj.AssemblyReference.cache
+D:\Bai tap PRN222\ClassroomBookingSolution\ClassroomBooking.Service\obj\Debug\net8.0\ClassroomBooking.Service.GeneratedMSBuildEditorConfig.editorconfig
+D:\Bai tap PRN222\ClassroomBookingSolution\ClassroomBooking.Service\obj\Debug\net8.0\ClassroomBooking.Service.AssemblyInfoInputs.cache
+D:\Bai tap PRN222\ClassroomBookingSolution\ClassroomBooking.Service\obj\Debug\net8.0\ClassroomBooking.Service.AssemblyInfo.cs
+D:\Bai tap PRN222\ClassroomBookingSolution\ClassroomBooking.Service\obj\Debug\net8.0\ClassroomBooking.Service.csproj.CoreCompileInputs.cache
+D:\Bai tap PRN222\ClassroomBookingSolution\ClassroomBooking.Service\obj\Debug\net8.0\Classroo.97035A7C.Up2Date
+D:\Bai tap PRN222\ClassroomBookingSolution\ClassroomBooking.Service\obj\Debug\net8.0\ClassroomBooking.Service.dll
+D:\Bai tap PRN222\ClassroomBookingSolution\ClassroomBooking.Service\obj\Debug\net8.0\refint\ClassroomBooking.Service.dll
+D:\Bai tap PRN222\ClassroomBookingSolution\ClassroomBooking.Service\obj\Debug\net8.0\ClassroomBooking.Service.pdb
+D:\Bai tap PRN222\ClassroomBookingSolution\ClassroomBooking.Service\obj\Debug\net8.0\ref\ClassroomBooking.Service.dll

@@ -1,0 +1,38 @@
+﻿@page
+@model ClassroomBooking.Presentation.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>Welcome to ClassroomBooking!</h2>
+<div id="notifications"></div>
+
+@section Scripts {
+    <!-- Sử dụng CDN hoặc file local (signalr.min.js) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+    <div>
+        <!-- Cách 1: Dùng thẻ a với 'asp-page' -->
+        <a asp-page="/Account/Login" class="btn btn-primary" style="margin-right: 10px;">
+            Login
+        </a>
+        <a asp-page="/Account/Signup" class="btn btn-secondary">
+            Sign Up
+        </a>
+    </div>
+    <script>
+        // Tạo connection
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/bookingHub")
+            .build();
+
+        connection.start()
+            .then(() => console.log("SignalR connected."))
+            .catch(err => console.error(err));
+
+        // Lắng nghe sự kiện "ReceiveBookingNotification" từ server
+        connection.on("ReceiveBookingNotification", (message) => {
+            let div = document.getElementById("notifications");
+            div.innerHTML += "<p>" + message + "</p>";
+        });
+    </script>
+}

@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\ClassroomBooking.Presentation.props" />
+</Project>

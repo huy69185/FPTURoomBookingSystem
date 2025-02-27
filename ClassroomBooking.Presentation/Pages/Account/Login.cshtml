@@ -1,0 +1,23 @@
+﻿@page
+@model ClassroomBooking.Presentation.Pages.Account.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+<h2>Login</h2>
+
+<form method="post">
+    <div>
+        <label>StudentCode:</label>
+        <input type="text" asp-for="LoginVM.StudentCode" />
+    </div>
+    <div>
+        <label>Password:</label>
+        <input type="password" asp-for="LoginVM.Password" />
+    </div>
+    <button type="submit">Login</button>
+</form>
+
+@if(!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div style="color:red">@Model.ErrorMessage</div>
+}
