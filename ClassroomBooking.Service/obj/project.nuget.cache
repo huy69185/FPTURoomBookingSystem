@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dTQ8tqkKlDY=",
+  "dgSpecHash": "pITM5YGnl4A=",
   "success": true,
-  "projectFilePath": "D:\\Bai tap PRN222\\ClassroomBookingSolution\\ClassroomBooking.Service\\ClassroomBooking.Service.csproj",
+  "projectFilePath": "C:\\Users\\huyh6\\OneDrive\\Desktop\\PRN222\\FPTURoomBookingSystem\\ClassroomBooking.Service\\ClassroomBooking.Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\huyh6\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\huyh6\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

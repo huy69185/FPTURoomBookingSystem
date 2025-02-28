@@ -3,21 +3,29 @@
 @{
     ViewData["Title"] = "Login";
 }
-<h2>Login</h2>
 
-<form method="post">
-    <div>
-        <label>StudentCode:</label>
-        <input type="text" asp-for="LoginVM.StudentCode" />
-    </div>
-    <div>
-        <label>Password:</label>
-        <input type="password" asp-for="LoginVM.Password" />
-    </div>
-    <button type="submit">Login</button>
-</form>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow p-4" style="width: 400px;">
+        <h2 class="text-center mb-4">Login</h2>
 
-@if(!string.IsNullOrEmpty(Model.ErrorMessage))
-{
-    <div style="color:red">@Model.ErrorMessage</div>
-}
+        <form method="post">
+            <div class="mb-3">
+                <label class="form-label">Student Code:</label>
+                <input type="text" class="form-control" asp-for="LoginVM.StudentCode" placeholder="Enter your student code" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password:</label>
+                <input type="password" class="form-control" asp-for="LoginVM.Password" placeholder="Enter your password" required />
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+
+        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <div class="alert alert-danger mt-3 text-center">@Model.ErrorMessage</div>
+        }
+    </div>
+</div>
+
+<!-- Add Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
