@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using ClassroomBooking.Repository.Interfaces;
 using ClassroomBooking.Service.Interfaces;
 using ClassroomBooking.Repository.Entities;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,15 +20,9 @@ builder.Services.AddDbContext<ClassroomBookingDbContext>(options =>
 
 // 3) Đăng ký Repository (DI)
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
-// builder.Services.AddScoped<IClassroomRepository, ClassroomRepository>();
-// builder.Services.AddScoped<IBookingRepository, BookingRepository>();
-// ... tuỳ bạn đã tạo repository nào ...
 
 // 4) Đăng ký Service (DI)
 builder.Services.AddScoped<IStudentService, StudentService>();
-// builder.Services.AddScoped<IClassroomService, ClassroomService>();
-// builder.Services.AddScoped<IBookingService, BookingService>();
-// ... tuỳ bạn đã tạo service nào ...
 
 // 5) Thêm SignalR
 builder.Services.AddSignalR();
@@ -35,7 +30,19 @@ builder.Services.AddSignalR();
 // 6) Nếu bạn cần session để lưu thông tin Login, kích hoạt session
 builder.Services.AddSession();
 
-// 7) Thêm Razor Pages
+// 7) Thêm Authentication bằng Cookie
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login";
+        options.LogoutPath = "/Account/Logout";
+        options.AccessDeniedPath = "/Account/AccessDenied";
+    });
+
+// 8) Thêm Authorization
+builder.Services.AddAuthorization();
+
+// 9) Thêm Razor Pages
 builder.Services.AddRazorPages();
 
 // Build app
@@ -59,7 +66,8 @@ app.UseRouting();
 // Dùng session (nếu đã đăng ký)
 app.UseSession();
 
-// Authorization (nếu cần, Identity v.v.)
+// Sử dụng Authentication và Authorization
+app.UseAuthentication();
 app.UseAuthorization();
 
 // Map Razor Pages

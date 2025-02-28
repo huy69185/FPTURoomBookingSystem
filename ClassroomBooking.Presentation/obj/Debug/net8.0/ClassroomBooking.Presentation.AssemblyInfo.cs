@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ClassroomBooking.Presentation")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9296c0f555855d32cfda080289b1aaa2cab58a7c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6432915abd3fd0dae667454a8d00c537781e0cb1")]
 [assembly: System.Reflection.AssemblyProductAttribute("ClassroomBooking.Presentation")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ClassroomBooking.Presentation")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

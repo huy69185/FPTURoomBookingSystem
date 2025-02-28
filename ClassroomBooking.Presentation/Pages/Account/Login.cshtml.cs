@@ -1,6 +1,9 @@
 ﻿using ClassroomBooking.Service.Interfaces;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Security.Claims;
 
 namespace ClassroomBooking.Presentation.Pages.Account
 {
@@ -28,25 +31,26 @@ namespace ClassroomBooking.Presentation.Pages.Account
 
             try
             {
-                var student = await _studentService.LoginAsync(
-                    LoginVM.StudentCode,
-                    LoginVM.Password);
+                var student = await _studentService.LoginAsync(LoginVM.StudentCode, LoginVM.Password);
 
-                // Lưu session
-                HttpContext.Session.SetString("StudentCode", student.StudentCode);
-                HttpContext.Session.SetInt32("Role", student.Role);
+                var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.Name, student.StudentCode),
+            new Claim(ClaimTypes.Role, student.Role == 1 ? "Admin" : "Student") // Xác định quyền
+        };
 
-                // Kiểm tra Role
-                if (student.Role == 1)
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var authProperties = new AuthenticationProperties
                 {
-                    // Role = 1 => Admin
-                    return RedirectToPage("/Admin/Index"); // ví dụ trang Admin
-                }
-                else
-                {
-                    // Role = 2 => Học sinh
-                    return RedirectToPage("/Index");
-                }
+                    IsPersistent = true // Duy trì phiên đăng nhập
+                };
+
+                await HttpContext.SignInAsync(
+                    CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(claimsIdentity),
+                    authProperties);
+
+                return student.Role == 1 ? RedirectToPage("/Admin/Index") : RedirectToPage("/Index");
             }
             catch (Exception ex)
             {
@@ -54,7 +58,8 @@ namespace ClassroomBooking.Presentation.Pages.Account
                 return Page();
             }
         }
-    }
+
+  }
 
     public class LoginViewModel
     {
