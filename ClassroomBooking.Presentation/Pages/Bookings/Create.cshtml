@@ -1,0 +1,49 @@
+﻿@page
+@model ClassroomBooking.Presentation.Pages.Bookings.CreateModel
+@using Microsoft.AspNetCore.Mvc.Rendering
+@{
+    ViewData["Title"] = "Create Booking";
+}
+
+<h2>Create Booking</h2>
+
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <!-- StudentCode được gán từ session, nên ẩn đi -->
+    <input type="hidden" asp-for="NewBooking.StudentCode" />
+
+    <div>
+        <label>Classroom:</label>
+        <select asp-for="NewBooking.ClassroomId"
+                asp-items="@(new SelectList(Model.ClassroomList, "ClassroomId", "ClassroomName"))">
+            <option value="">--Select Classroom--</option>
+        </select>
+        <span asp-validation-for="NewBooking.ClassroomId" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label>Start Time:</label>
+        <input type="datetime-local" asp-for="NewBooking.StartTime" step="60" required />
+        <span asp-validation-for="NewBooking.StartTime" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label>End Time:</label>
+        <input type="datetime-local" asp-for="NewBooking.EndTime" step="60" required />
+        <span asp-validation-for="NewBooking.EndTime" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label>Purpose:</label>
+        <input type="text" asp-for="NewBooking.Purpose" required />
+        <span asp-validation-for="NewBooking.Purpose" class="text-danger"></span>
+    </div>
+
+    <button type="submit">Create</button>
+</form>
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div style="color: red;">@Model.ErrorMessage</div>
+}
