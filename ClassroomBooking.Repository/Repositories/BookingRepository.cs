@@ -54,6 +54,12 @@ namespace ClassroomBooking.Repository.Repositories
                 await _db.SaveChangesAsync();
             }
         }
+        public async Task<List<Booking>> GetByClassroomAsync(int classroomId)
+        {
+            return await _db.Bookings
+                .Where(b => b.ClassroomId == classroomId)
+                .ToListAsync();
+        }
 
     }
 }

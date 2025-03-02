@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Http;
+using System.Linq;
 
 namespace ClassroomBooking.Presentation.Pages.Bookings
 {
@@ -23,49 +23,72 @@ namespace ClassroomBooking.Presentation.Pages.Bookings
         [BindProperty]
         public BookingCreateModel NewBooking { get; set; } = new();
 
-        // Danh sách phòng để hiển thị trong dropdown
+        // Danh sách phòng (cho dropdown và layout sơ đồ)
         public List<Classrooms> ClassroomList { get; set; } = new();
+
+        // Danh sách ID phòng đã được đặt trong khung giờ
+        public List<int> BookedRoomIds { get; set; } = new();
 
         public string ErrorMessage { get; set; } = "";
 
         public async Task<IActionResult> OnGetAsync()
         {
-            // Kiểm tra đăng nhập: lấy StudentCode từ session
-            var studentCode = HttpContext.Session.GetString("StudentCode");
-            if (string.IsNullOrEmpty(studentCode))
+            // Kiểm tra đăng nhập qua cookie (User.Identity)
+            if (!User.Identity.IsAuthenticated)
             {
                 return RedirectToPage("/Account/Login");
             }
 
-            // Gán StudentCode tự động từ session (không cho user nhập)
-            NewBooking.StudentCode = studentCode;
+            // Lấy StudentCode từ User.Identity.Name
+            NewBooking.StudentCode = User.Identity.Name;
 
             // Lấy danh sách phòng
             ClassroomList = await _classroomService.GetAllClassroomsAsync();
 
-            // Gán thời gian mặc định với giây bị loại bỏ (chỉ giờ và phút)
+            // Gán thời gian mặc định, làm tròn đến phút (không có giây)
             var now = DateTime.Now;
             now = new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, 0);
             NewBooking.StartTime = now;
             NewBooking.EndTime = now.AddHours(1);
 
+            // Nạp sơ đồ phòng theo khung giờ đã chọn
+            await LoadRoomMapAsync();
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            // Kiểm tra đăng nhập
-            var studentCode = HttpContext.Session.GetString("StudentCode");
-            if (string.IsNullOrEmpty(studentCode))
+            if (!User.Identity.IsAuthenticated)
             {
                 return RedirectToPage("/Account/Login");
             }
-            // Đảm bảo StudentCode từ session luôn được gán
-            NewBooking.StudentCode = studentCode;
+            NewBooking.StudentCode = User.Identity.Name;
 
+            // Lấy lại danh sách phòng để cập nhật dropdown và layout
+            ClassroomList = await _classroomService.GetAllClassroomsAsync();
+
+            // Lấy giá trị action: "refresh" hoặc "create"
+            var action = Request.Form["action"].ToString();
+
+            // Nếu người dùng chỉ muốn "Xem sơ đồ phòng", thì không cần yêu cầu các trường Classroom và Purpose
+            if (action == "refresh")
+            {
+                // Loại bỏ lỗi không cần thiết
+                ModelState.Remove("NewBooking.ClassroomId");
+                ModelState.Remove("NewBooking.Purpose");
+
+                // Nếu StartTime và EndTime hợp lệ, cập nhật sơ đồ
+                if (ModelState.IsValid)
+                {
+                    await LoadRoomMapAsync();
+                }
+                return Page();
+            }
+
+            // Nếu action là "create", kiểm tra ModelState đầy đủ
             if (!ModelState.IsValid)
             {
-                ClassroomList = await _classroomService.GetAllClassroomsAsync();
+                await LoadRoomMapAsync();
                 return Page();
             }
 
@@ -74,7 +97,7 @@ namespace ClassroomBooking.Presentation.Pages.Bookings
                 if (NewBooking.EndTime <= NewBooking.StartTime)
                 {
                     ErrorMessage = "End Time must be after Start Time!";
-                    ClassroomList = await _classroomService.GetAllClassroomsAsync();
+                    await LoadRoomMapAsync();
                     return Page();
                 }
 
@@ -91,15 +114,29 @@ namespace ClassroomBooking.Presentation.Pages.Bookings
                 };
 
                 await _bookingService.CreateBookingAsync(bookingEntity);
-
                 return RedirectToPage("/Bookings/Booking");
             }
             catch (Exception ex)
             {
                 ErrorMessage = "Error creating booking: " + ex.Message;
-                ClassroomList = await _classroomService.GetAllClassroomsAsync();
+                await LoadRoomMapAsync();
                 return Page();
             }
+        }
+
+        private async Task LoadRoomMapAsync()
+        {
+            // Lấy tất cả booking
+            var allBookings = await _bookingService.GetAllBookingsAsync();
+
+            // Lọc các booking chồng chéo với khung giờ được nhập (StartTime, EndTime)
+            var bookedRooms = allBookings
+                .Where(b => b.EndTime > NewBooking.StartTime && b.StartTime < NewBooking.EndTime)
+                .Select(b => b.ClassroomId)
+                .Distinct()
+                .ToList();
+
+            BookedRoomIds = bookedRooms;
         }
     }
 }

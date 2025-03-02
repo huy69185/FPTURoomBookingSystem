@@ -2,8 +2,9 @@
 using ClassroomBooking.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ClassroomBooking.Presentation.Pages.Bookings
 {
@@ -20,15 +21,15 @@ namespace ClassroomBooking.Presentation.Pages.Bookings
 
         public async Task<IActionResult> OnGetAsync()
         {
-            // Lấy StudentCode từ session (được gán khi đăng nhập)
-            var studentCode = HttpContext.Session.GetString("StudentCode");
-            if (string.IsNullOrEmpty(studentCode))
+            if (!User.Identity.IsAuthenticated)
             {
-                // Nếu chưa đăng nhập, chuyển hướng đến trang Login
                 return RedirectToPage("/Account/Login");
             }
 
-            // Sử dụng phương thức của BookingService để lấy danh sách booking của sinh viên
+            // Lấy StudentCode từ User.Identity.Name
+            var studentCode = User.Identity.Name;
+
+            // Dùng service để lấy danh sách booking của sinh viên
             BookingList = await _bookingService.GetBookingsByStudentCodeAsync(studentCode);
             return Page();
         }

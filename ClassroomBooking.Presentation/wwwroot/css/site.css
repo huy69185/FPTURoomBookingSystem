@@ -1,4 +1,4 @@
-html {
+﻿html {
   font-size: 14px;
 }
 
@@ -19,4 +19,30 @@ html {
 
 body {
   margin-bottom: 60px;
+}
+/* Các style hiện có của bạn ... */
+
+.room-map {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.room-box {
+    width: 120px;
+    height: 60px;
+    border: 1px solid #333;
+    text-align: center;
+    line-height: 1.2em;
+    padding-top: 5px;
+    cursor: pointer;
+}
+
+.available {
+    background-color: #90ee90; /* xanh nhạt */
+}
+
+.booked {
+    background-color: #f08080; /* đỏ nhạt */
 }

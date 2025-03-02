@@ -9,5 +9,7 @@ namespace ClassroomBooking.Repository.Interfaces
         Task<List<Booking>> GetAllAsync();
         Task UpdateAsync(Booking booking);
         Task DeleteAsync(int bookingId);
+        Task<List<Booking>> GetByClassroomAsync(int classroomId);
+
     }
 }

@@ -25,10 +25,26 @@ namespace ClassroomBooking.Service.Services
 
         public async Task CreateBookingAsync(Booking booking)
         {
-            // Gán mặc định CreatedDate
+            // Lấy tất cả booking cùng Classroom
+            var allInSameRoom = await _bookingRepo.GetByClassroomAsync(booking.ClassroomId);
+
+            // Kiểm tra trùng thời gian (overlap)
+            bool isOverlap = allInSameRoom.Any(b =>
+                // Điều kiện chồng chéo: booking cũ có EndTime > booking mới StartTime
+                //                      VÀ booking cũ có StartTime < booking mới EndTime
+                b.EndTime > booking.StartTime && b.StartTime < booking.EndTime
+            );
+
+            if (isOverlap)
+            {
+                throw new Exception("Phòng này đã có người đặt trong thời gian bạn chọn!");
+            }
+
+            // Nếu không trùng, cho phép tạo
             booking.CreatedDate = DateTime.Now;
             await _bookingRepo.CreateAsync(booking);
         }
+
 
         public async Task UpdateBookingAsync(Booking booking)
         {
@@ -45,5 +61,6 @@ namespace ClassroomBooking.Service.Services
             var allBookings = await _bookingRepo.GetAllAsync();
             return allBookings.Where(b => b.StudentCode == studentCode).ToList();
         }
+
     }
 }
