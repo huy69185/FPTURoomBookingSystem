@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 var builder = WebApplication.CreateBuilder(args);
 
 // 1) Khai báo chuỗi kết nối SQL Server
-var connString = "Server=Huy\\Huy;Database=ClassroomBookingDB;User Id=sa;Password=12345";
+var connString = "Server=NGUYEN\\NGUYEN;Database=ClassroomBookingDB;User Id=sa;Password=12345";
 // Hoặc ví dụ:
 // var connString = "Server=.;Database=ClassroomBookingDB;Trusted_Connection=True;";
 
@@ -20,9 +20,13 @@ builder.Services.AddDbContext<ClassroomBookingDbContext>(options =>
 
 // 3) Đăng ký Repository (DI)
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<IBookingRepository, BookingRepository>();
+builder.Services.AddScoped<IClassroomRepository, ClassroomRepository>();
 
 // 4) Đăng ký Service (DI)
 builder.Services.AddScoped<IStudentService, StudentService>();
+builder.Services.AddScoped<IBookingService, BookingService>();
+builder.Services.AddScoped<IClassroomService, ClassroomService>();
 
 // 5) Thêm SignalR
 builder.Services.AddSignalR();

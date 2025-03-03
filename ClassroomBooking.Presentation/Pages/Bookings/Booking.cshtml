@@ -1,0 +1,44 @@
+﻿@page
+@model ClassroomBooking.Presentation.Pages.Bookings.BookingModel
+@{
+    ViewData["Title"] = "View Bookings";
+}
+
+<h2>View Bookings</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>BookingId</th>
+            <th>ClassroomId</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Purpose</th>
+            <th>Status</th>
+            <th>Created Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.BookingList != null && Model.BookingList.Any())
+        {
+            foreach (var b in Model.BookingList)
+            {
+                <tr>
+                    <td>@b.BookingId</td>
+                    <td>@b.ClassroomId</td>
+                    <td>@b.StartTime.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@b.EndTime.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@b.Purpose</td>
+                    <td>@b.BookingStatus</td>
+                    <td>@b.CreatedDate.ToString("dd/MM/yyyy HH:mm")</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7">No bookings found.</td>
+            </tr>
+        }
+    </tbody>
+</table>
