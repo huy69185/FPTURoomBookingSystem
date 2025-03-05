@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\huyh6\\OneDrive\\Desktop\\PRN222\\FPTURoomBookingSystem\\ClassroomBooking.Service\\ClassroomBooking.Service.csproj": {}
+    "C:\\Users\\huyh6\\OneDrive\\Desktop\\Ki 7\\PRN222\\FPTURoomBookingSystem\\ClassroomBooking.Service\\ClassroomBooking.Service.csproj": {}
   },
   "projects": {
-    "C:\\Users\\huyh6\\OneDrive\\Desktop\\PRN222\\FPTURoomBookingSystem\\ClassroomBooking.Repository\\ClassroomBooking.Repository.csproj": {
+    "C:\\Users\\huyh6\\OneDrive\\Desktop\\Ki 7\\PRN222\\FPTURoomBookingSystem\\ClassroomBooking.Repository\\ClassroomBooking.Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\huyh6\\OneDrive\\Desktop\\PRN222\\FPTURoomBookingSystem\\ClassroomBooking.Repository\\ClassroomBooking.Repository.csproj",
+        "projectUniqueName": "C:\\Users\\huyh6\\OneDrive\\Desktop\\Ki 7\\PRN222\\FPTURoomBookingSystem\\ClassroomBooking.Repository\\ClassroomBooking.Repository.csproj",
         "projectName": "ClassroomBooking.Repository",
-        "projectPath": "C:\\Users\\huyh6\\OneDrive\\Desktop\\PRN222\\FPTURoomBookingSystem\\ClassroomBooking.Repository\\ClassroomBooking.Repository.csproj",
+        "projectPath": "C:\\Users\\huyh6\\OneDrive\\Desktop\\Ki 7\\PRN222\\FPTURoomBookingSystem\\ClassroomBooking.Repository\\ClassroomBooking.Repository.csproj",
         "packagesPath": "C:\\Users\\huyh6\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\huyh6\\OneDrive\\Desktop\\PRN222\\FPTURoomBookingSystem\\ClassroomBooking.Repository\\obj\\",
+        "outputPath": "C:\\Users\\huyh6\\OneDrive\\Desktop\\Ki 7\\PRN222\\FPTURoomBookingSystem\\ClassroomBooking.Repository\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -85,14 +85,14 @@
         }
       }
     },
-    "C:\\Users\\huyh6\\OneDrive\\Desktop\\PRN222\\FPTURoomBookingSystem\\ClassroomBooking.Service\\ClassroomBooking.Service.csproj": {
+    "C:\\Users\\huyh6\\OneDrive\\Desktop\\Ki 7\\PRN222\\FPTURoomBookingSystem\\ClassroomBooking.Service\\ClassroomBooking.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\huyh6\\OneDrive\\Desktop\\PRN222\\FPTURoomBookingSystem\\ClassroomBooking.Service\\ClassroomBooking.Service.csproj",
+        "projectUniqueName": "C:\\Users\\huyh6\\OneDrive\\Desktop\\Ki 7\\PRN222\\FPTURoomBookingSystem\\ClassroomBooking.Service\\ClassroomBooking.Service.csproj",
         "projectName": "ClassroomBooking.Service",
-        "projectPath": "C:\\Users\\huyh6\\OneDrive\\Desktop\\PRN222\\FPTURoomBookingSystem\\ClassroomBooking.Service\\ClassroomBooking.Service.csproj",
+        "projectPath": "C:\\Users\\huyh6\\OneDrive\\Desktop\\Ki 7\\PRN222\\FPTURoomBookingSystem\\ClassroomBooking.Service\\ClassroomBooking.Service.csproj",
         "packagesPath": "C:\\Users\\huyh6\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\huyh6\\OneDrive\\Desktop\\PRN222\\FPTURoomBookingSystem\\ClassroomBooking.Service\\obj\\",
+        "outputPath": "C:\\Users\\huyh6\\OneDrive\\Desktop\\Ki 7\\PRN222\\FPTURoomBookingSystem\\ClassroomBooking.Service\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -113,8 +113,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\huyh6\\OneDrive\\Desktop\\PRN222\\FPTURoomBookingSystem\\ClassroomBooking.Repository\\ClassroomBooking.Repository.csproj": {
-                "projectPath": "C:\\Users\\huyh6\\OneDrive\\Desktop\\PRN222\\FPTURoomBookingSystem\\ClassroomBooking.Repository\\ClassroomBooking.Repository.csproj"
+              "C:\\Users\\huyh6\\OneDrive\\Desktop\\Ki 7\\PRN222\\FPTURoomBookingSystem\\ClassroomBooking.Repository\\ClassroomBooking.Repository.csproj": {
+                "projectPath": "C:\\Users\\huyh6\\OneDrive\\Desktop\\Ki 7\\PRN222\\FPTURoomBookingSystem\\ClassroomBooking.Repository\\ClassroomBooking.Repository.csproj"
               }
             }
           }

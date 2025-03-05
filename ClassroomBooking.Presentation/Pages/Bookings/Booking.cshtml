@@ -4,41 +4,49 @@
     ViewData["Title"] = "View Bookings";
 }
 
-<h2>View Bookings</h2>
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">View Bookings</h2>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>BookingId</th>
-            <th>ClassroomId</th>
-            <th>Start Time</th>
-            <th>End Time</th>
-            <th>Purpose</th>
-            <th>Status</th>
-            <th>Created Date</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model.BookingList != null && Model.BookingList.Any())
-        {
-            foreach (var b in Model.BookingList)
-            {
+    <div class="card shadow-lg p-4">
+        <table class="table table-hover table-striped text-center">
+            <thead class="table-dark">
                 <tr>
-                    <td>@b.BookingId</td>
-                    <td>@b.ClassroomId</td>
-                    <td>@b.StartTime.ToString("dd/MM/yyyy HH:mm")</td>
-                    <td>@b.EndTime.ToString("dd/MM/yyyy HH:mm")</td>
-                    <td>@b.Purpose</td>
-                    <td>@b.BookingStatus</td>
-                    <td>@b.CreatedDate.ToString("dd/MM/yyyy HH:mm")</td>
+                    <th>Booking ID</th>
+                    <th>Classroom</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Purpose</th>
+                    <th>Status</th>
+                    <th>Created Date</th>
                 </tr>
-            }
-        }
-        else
-        {
-            <tr>
-                <td colspan="7">No bookings found.</td>
-            </tr>
-        }
-    </tbody>
-</table>
+            </thead>
+            <tbody>
+                @if (Model.BookingList != null && Model.BookingList.Any())
+                {
+                    foreach (var b in Model.BookingList)
+                    {
+                        <tr class="align-middle">
+                            <td>@b.BookingId</td>
+                            <td>@b.ClassroomId</td>
+                            <td>@b.StartTime.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td>@b.EndTime.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td>@b.Purpose</td>
+                            <td>
+                                <span class="badge @(b.BookingStatus == "Confirmed" ? "bg-success" : "bg-warning text-dark")">
+                                    @b.BookingStatus
+                                </span>
+                            </td>
+                            <td>@b.CreatedDate.ToString("dd/MM/yyyy HH:mm")</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7" class="text-center text-muted">No bookings found.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

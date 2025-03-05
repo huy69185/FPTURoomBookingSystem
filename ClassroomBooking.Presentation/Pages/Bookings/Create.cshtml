@@ -5,67 +5,107 @@
     ViewData["Title"] = "Create Booking";
 }
 
-<h2>Create Booking</h2>
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div class="alert alert-danger mt-3 text-center fw-bold">@Model.ErrorMessage</div>
+}
+<h2 class="mb-4 text-center text-primary fw-bold">Create Booking</h2>
+<div class="container mt-4 d-flex justify-content-center align-items-center vh-99">
+   
 
-<form method="post">
-    <div asp-validation-summary="All" class="text-danger"></div>
+    <form method="post" class="card p-4 shadow-lg border-0">
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
 
-    <!-- StudentCode được gán từ cookie (User.Identity) nên ẩn đi -->
-    <input type="hidden" asp-for="NewBooking.StudentCode" />
+        <input type="hidden" asp-for="NewBooking.StudentCode" />
+        <input type="hidden" asp-for="NewBooking.ClassroomId" id="selectedRoomId" />
 
-    <!-- Những trường chỉ cần khi tạo booking -->
-    <div>
-        <label>Classroom:</label>
-        <select asp-for="NewBooking.ClassroomId"
-                asp-items="@(new SelectList(Model.ClassroomList, "ClassroomId", "ClassroomName"))">
-            <option value="">--Select Classroom--</option>
-        </select>
-        <span asp-validation-for="NewBooking.ClassroomId" class="text-danger"></span>
-    </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold">Purpose:</label>
+            <input type="text" asp-for="NewBooking.Purpose" class="form-control border-primary" placeholder="Enter purpose..." />
+            <span asp-validation-for="NewBooking.Purpose" class="text-danger"></span>
+        </div>
 
-    <div>
-        <label>Purpose:</label>
-        <input type="text" asp-for="NewBooking.Purpose" />
-        <span asp-validation-for="NewBooking.Purpose" class="text-danger"></span>
-    </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold">Start Time:</label>
+            <input type="datetime-local" asp-for="NewBooking.StartTime" class="form-control border-primary" step="60" required />
+            <span asp-validation-for="NewBooking.StartTime" class="text-danger"></span>
+        </div>
 
-    <!-- Các trường cần cho cả check layout và tạo booking -->
-    <div>
-        <label>Start Time:</label>
-        <input type="datetime-local" asp-for="NewBooking.StartTime" step="60" required />
-        <span asp-validation-for="NewBooking.StartTime" class="text-danger"></span>
-    </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold">End Time:</label>
+            <input type="datetime-local" asp-for="NewBooking.EndTime" class="form-control border-primary" step="60" required />
+            <span asp-validation-for="NewBooking.EndTime" class="text-danger"></span>
+        </div>
 
-    <div>
-        <label>End Time:</label>
-        <input type="datetime-local" asp-for="NewBooking.EndTime" step="60" required />
-        <span asp-validation-for="NewBooking.EndTime" class="text-danger"></span>
-    </div>
-
-    <div class="mt-3">
-        <!-- Nút "Xem sơ đồ phòng": chỉ dùng để cập nhật layout (refresh) -->
-        <button type="submit" name="action" value="refresh" class="btn btn-info me-2">Xem sơ đồ phòng</button>
-        <!-- Nút "Create Booking": tạo booking -->
-        <button type="submit" name="action" value="create" class="btn btn-primary">Create Booking</button>
-    </div>
-</form>
+        <div class="d-flex justify-content-center mt-3">
+            <button type="submit" name="action" value="refresh" class="btn btn-outline-info btn-lg me-3">Xem sơ đồ phòng</button>
+            <button type="submit" name="action" value="create" class="btn btn-primary btn-lg">Create Booking</button>
+        </div>
+    </form>
+</div>
 
 @if (!string.IsNullOrEmpty(Model.ErrorMessage))
 {
-    <div class="mt-3 text-danger">@Model.ErrorMessage</div>
+    <div class="mt-3 text-danger text-center fw-bold">@Model.ErrorMessage</div>
 }
 
 <hr />
 
-<!-- Layout sơ đồ phòng -->
-<h3>Layout Sơ Đồ Phòng (Trong khung giờ đã chọn)</h3>
-<div class="room-map">
-    @foreach (var room in Model.ClassroomList)
-    {
-        bool isBooked = Model.BookedRoomIds.Contains(room.ClassroomId);
-        <div class="room-box @(isBooked ? "booked" : "available")">
-            <strong>@room.ClassroomName</strong><br />
-            (ID: @room.ClassroomId)
-        </div>
-    }
+<div class="container mt-4">
+    <h3 class="text-center mb-4 text-secondary fw-bold">Layout Sơ Đồ Phòng (Trong khung giờ đã chọn)</h3>
+    <div class="d-flex flex-wrap gap-3 justify-content-center">
+        @foreach (var room in Model.ClassroomList)
+        {
+            bool isBooked = Model.BookedRoomIds.Contains(room.ClassroomId);
+            <div class="room-box p-3 text-center border rounded shadow-sm fw-bold @(isBooked ? "bg-danger text-white" : "bg-success text-white")"
+                 onclick="selectRoom(@room.ClassroomId, this)">
+                <strong>@room.ClassroomName</strong><br />
+                (ID: @room.ClassroomId)
+            </div>
+        }
+    </div>
 </div>
+
+<script>
+    function selectRoom(roomId, element) {
+        document.getElementById("selectedRoomId").value = roomId;
+
+        // Reset màu của tất cả các phòng
+        document.querySelectorAll('.room-box').forEach(box => {
+            box.classList.remove('bg-warning');
+            if (!box.classList.contains('bg-danger')) {
+                box.classList.add('bg-success');
+            }
+        });
+
+        // Đổi màu phòng được chọn
+        if (!element.classList.contains('bg-danger')) {
+            element.classList.remove('bg-success');
+            element.classList.add('bg-warning');
+        }
+    }
+</script>
+
+<style>
+    .room-box {
+        width: 160px;
+        height: 110px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.1rem;
+        cursor: pointer;
+    }
+
+    .btn-lg {
+        padding: 10px 20px;
+        font-size: 1.2rem;
+    }
+
+    .form-control {
+        font-size: 1.1rem;
+        padding: 10px;
+    }
+</style>

@@ -67,17 +67,13 @@ namespace ClassroomBooking.Presentation.Pages.Bookings
             // Lấy lại danh sách phòng để cập nhật dropdown và layout
             ClassroomList = await _classroomService.GetAllClassroomsAsync();
 
-            // Lấy giá trị action: "refresh" hoặc "create"
             var action = Request.Form["action"].ToString();
 
-            // Nếu người dùng chỉ muốn "Xem sơ đồ phòng", thì không cần yêu cầu các trường Classroom và Purpose
             if (action == "refresh")
             {
-                // Loại bỏ lỗi không cần thiết
                 ModelState.Remove("NewBooking.ClassroomId");
                 ModelState.Remove("NewBooking.Purpose");
 
-                // Nếu StartTime và EndTime hợp lệ, cập nhật sơ đồ
                 if (ModelState.IsValid)
                 {
                     await LoadRoomMapAsync();
@@ -85,7 +81,6 @@ namespace ClassroomBooking.Presentation.Pages.Bookings
                 return Page();
             }
 
-            // Nếu action là "create", kiểm tra ModelState đầy đủ
             if (!ModelState.IsValid)
             {
                 await LoadRoomMapAsync();
@@ -94,6 +89,17 @@ namespace ClassroomBooking.Presentation.Pages.Bookings
 
             try
             {
+                var now = DateTime.Now;
+                now = new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, 0);
+
+                // Kiểm tra nếu StartTime hoặc EndTime nằm trong quá khứ
+                if (NewBooking.StartTime < now)
+                {
+                    ErrorMessage = "Start Time must be in the future!";
+                    await LoadRoomMapAsync();
+                    return Page();
+                }
+
                 if (NewBooking.EndTime <= NewBooking.StartTime)
                 {
                     ErrorMessage = "End Time must be after Start Time!";
@@ -101,7 +107,6 @@ namespace ClassroomBooking.Presentation.Pages.Bookings
                     return Page();
                 }
 
-                // Chuyển BookingCreateModel sang entity Booking
                 var bookingEntity = new Booking
                 {
                     StudentCode = NewBooking.StudentCode,
