@@ -10,13 +10,13 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 var builder = WebApplication.CreateBuilder(args);
 
 // 1) Khai báo chuỗi kết nối SQL Server
-var connString = "Server=NGUYEN\\NGUYEN;Database=ClassroomBookingDB;User Id=sa;Password=12345";
+builder.Services.AddDbContext<ClassroomBookingDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ClassroomBookingDB")));
 // Hoặc ví dụ:
 // var connString = "Server=.;Database=ClassroomBookingDB;Trusted_Connection=True;";
 
 // 2) Thêm DbContext (EF Core)
-builder.Services.AddDbContext<ClassroomBookingDbContext>(options =>
-    options.UseSqlServer(connString));
+
 
 // 3) Đăng ký Repository (DI)
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
