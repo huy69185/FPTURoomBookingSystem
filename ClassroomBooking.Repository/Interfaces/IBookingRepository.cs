@@ -10,6 +10,7 @@ namespace ClassroomBooking.Repository.Interfaces
         Task UpdateAsync(Booking booking);
         Task DeleteAsync(int bookingId);
         Task<List<Booking>> GetByClassroomAsync(int classroomId);
+        Task <bool> UpdateBookingStatusAsync(int bookingId, string status);
 
     }
 }

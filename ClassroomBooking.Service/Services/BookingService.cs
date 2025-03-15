@@ -1,6 +1,7 @@
 ﻿using ClassroomBooking.Repository.Entities;
 using ClassroomBooking.Repository.Interfaces;
 using ClassroomBooking.Service.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClassroomBooking.Service.Services
 {
@@ -62,5 +63,10 @@ namespace ClassroomBooking.Service.Services
             return allBookings.Where(b => b.StudentCode == studentCode).ToList();
         }
 
+        public async Task<bool> UpdateBookingStatusAsync(int bookingId, string status)
+        {
+            var result = await _bookingRepo.UpdateBookingStatusAsync(bookingId, status);
+            return result;
+        }
     }
 }

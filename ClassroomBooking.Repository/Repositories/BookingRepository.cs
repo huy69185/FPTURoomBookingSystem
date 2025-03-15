@@ -61,5 +61,15 @@ namespace ClassroomBooking.Repository.Repositories
                 .ToListAsync();
         }
 
+        public async Task<bool> UpdateBookingStatusAsync(int bookingId, string status)
+        {
+            var booking = await GetByIdAsync(bookingId);
+
+            if (booking == null) return false;
+
+            booking.BookingStatus = status;
+            await _db.SaveChangesAsync();
+            return true;
+        }
     }
 }

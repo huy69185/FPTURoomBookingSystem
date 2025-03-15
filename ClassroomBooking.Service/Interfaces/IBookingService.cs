@@ -10,5 +10,7 @@ namespace ClassroomBooking.Service.Interfaces
         Task UpdateBookingAsync(Booking booking);
         Task DeleteBookingAsync(int bookingId);
         Task<List<Booking>> GetBookingsByStudentCodeAsync(string studentCode);
+        Task<bool> UpdateBookingStatusAsync(int bookingId, string status);
+
     }
 }
