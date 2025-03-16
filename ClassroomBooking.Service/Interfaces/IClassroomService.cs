@@ -6,5 +6,13 @@ namespace ClassroomBooking.Service.Interfaces
     {
         Task<List<Classrooms>> GetAllClassroomsAsync();
         // Bạn có thể bổ sung thêm các phương thức khác (GetById, Create, ...)
+        Task<Classrooms?> GetClassroomByIdAsync(int classroomId);
+        Task CreateClassroomAsync(Classrooms classroomId);
+        Task UpdateClassroomAsync(Classrooms classroomId);
+        Task DeleteClassroomAsync(int classroomId);
+
+
+
+
     }
 }

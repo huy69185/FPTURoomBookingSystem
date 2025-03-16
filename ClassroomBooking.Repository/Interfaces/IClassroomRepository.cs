@@ -11,5 +11,10 @@ namespace ClassroomBooking.Repository.Interfaces
     {
         Task<List<Classrooms>> GetAllAsync();
         // ...
+        Task<Classrooms?> GetClassroomByIdAsync(int classroomId);
+        Task CreateClassroomAsync(Classrooms classroomId);
+        Task UpdateClassroomAsync(Classrooms classroomId);
+        Task DeleteClassroomAsync(int classroomId);
+
     }
 }

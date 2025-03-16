@@ -1,0 +1,44 @@
+﻿@page
+@model ClassroomBooking.Presentation.Pages.Admin.Classroom.ManageClassroomsModel
+@{
+    ViewData["Title"] = "Manage Classrooms";
+}
+
+<h2 class="mb-4">Manage Classrooms</h2>
+
+<!-- Add Classroom Button -->
+<div class="mb-3">
+    <a asp-page="/Admin/Classroom/Create" class="btn btn-primary">
+        <i class="bi bi-plus-lg"></i> Add Classroom
+    </a>
+</div>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Classroom Name</th>
+            <th>Building</th>
+            <th>Capacity</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var classroom in Model.ClassroomList)
+        {
+            <tr>
+                <td>@classroom.ClassroomId</td>
+                <td>@classroom.ClassroomName</td>
+                <td>@classroom.BuildingName</td>
+                <td>@classroom.Capacity</td>
+                <td>@(classroom.Status == "Active" ? "Active" : "Inactive")</td>
+                <td>
+                    <a asp-page="/Admin/Classroom/Details" asp-route-id="@classroom.ClassroomId" class="btn btn-info btn-sm">Details</a>
+                    <a asp-page="/Admin/Classroom/Edit" asp-route-id="@classroom.ClassroomId" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-page="/Admin/Classroom/Delete" asp-route-id="@classroom.ClassroomId" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

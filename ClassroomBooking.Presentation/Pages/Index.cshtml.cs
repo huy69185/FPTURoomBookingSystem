@@ -18,7 +18,7 @@ namespace ClassroomBooking.Presentation.Pages
             {
                 if (User.IsInRole("Admin"))
                 {
-                    return Redirect("/Admin/AdminBooking"); // Chuyển hướng Admin
+                    return Redirect("/Admin/Index"); // Chuyển hướng Admin
                 }
                 else if (User.IsInRole("User"))
                 {

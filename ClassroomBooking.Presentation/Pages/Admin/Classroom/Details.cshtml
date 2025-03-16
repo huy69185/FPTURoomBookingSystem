@@ -1,0 +1,39 @@
+﻿@page
+@model ClassroomBooking.Presentation.Pages.Admin.Classroom.DetailsModel
+
+@{
+    ViewData["Title"] = "Classroom Details";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg p-4 rounded">
+        <h2 class="text-primary"><i class="bi bi-info-circle"></i> Classroom Details</h2>
+        <hr />
+
+        <dl class="row">
+            <dt class="col-sm-3 fw-bold">Classroom Name:</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Classrooms.ClassroomName)</dd>
+
+            <dt class="col-sm-3 fw-bold">Building Name:</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Classrooms.BuildingName)</dd>
+
+            <dt class="col-sm-3 fw-bold">Capacity:</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Classrooms.Capacity)</dd>
+
+            <dt class="col-sm-3 fw-bold">Status:</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Classrooms.Status)</dd>
+
+            <dt class="col-sm-3 fw-bold">Description:</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Classrooms.Description)</dd>
+        </dl>
+
+        <div class="d-flex justify-content-between">
+            <a asp-page="./ManageClassrooms" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Back to List
+            </a>
+            <a asp-page="./Edit" asp-route-id="@Model.Classrooms.ClassroomId" class="btn btn-primary">
+                <i class="bi bi-pencil"></i> Edit
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+﻿@page
+@model ClassroomBooking.Presentation.Pages.Admin.Classroom.CreateModel
+
+@{
+    ViewData["Title"] = "Create Classroom";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-3 text-primary">Create Classroom</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow-lg p-4 rounded">
+                <h4 class="text-secondary">Classroom Details</h4>
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Classrooms.ClassroomName" class="form-label fw-bold"></label>
+                        <input asp-for="Classrooms.ClassroomName" class="form-control" placeholder="Enter classroom name" />
+                        <span asp-validation-for="Classrooms.ClassroomName" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Classrooms.BuildingName" class="form-label fw-bold"></label>
+                        <input asp-for="Classrooms.BuildingName" class="form-control" placeholder="Enter building name" />
+                        <span asp-validation-for="Classrooms.BuildingName" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Classrooms.Capacity" class="form-label fw-bold"></label>
+                        <input asp-for="Classrooms.Capacity" type="number" class="form-control" placeholder="Enter capacity" />
+                        <span asp-validation-for="Classrooms.Capacity" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Classrooms.Status" class="form-label fw-bold"></label>
+                        <select asp-for="Classrooms.Status" class="form-select">
+                            <option value="Available">Available</option>
+                            <option value="Occupied">Occupied</option>
+                            <option value="Maintenance">Maintenance</option>
+                        </select>
+                        <span asp-validation-for="Classrooms.Status" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Classrooms.Description" class="form-label fw-bold"></label>
+                        <textarea asp-for="Classrooms.Description" class="form-control" rows="3" placeholder="Enter description"></textarea>
+                        <span asp-validation-for="Classrooms.Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a asp-page="ManageClassrooms" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i> Back to List
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-save"></i> Create
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
