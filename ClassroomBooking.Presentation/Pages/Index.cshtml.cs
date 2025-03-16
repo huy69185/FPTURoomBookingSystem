@@ -12,9 +12,21 @@ namespace ClassroomBooking.Presentation.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if (User.Identity.IsAuthenticated) // Kiểm tra nếu đã đăng nhập
+            {
+                if (User.IsInRole("Admin"))
+                {
+                    return Redirect("/Admin/AdminBooking"); // Chuyển hướng Admin
+                }
+                else if (User.IsInRole("User"))
+                {
+                    return Redirect("/Index"); // Chuyển hướng User
+                }
+            }
 
+            return Page(); // Nếu chưa đăng nhập, hiển thị trang Index mặc định
         }
     }
 }
