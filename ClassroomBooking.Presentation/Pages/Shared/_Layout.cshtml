@@ -30,12 +30,28 @@
                     <ul class="navbar-nav">
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Bookings/Booking">View Bookings</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Bookings/Create">Create Booking</a>
-                            </li>
+                            // Lấy vai trò người dùng từ Claims
+                            var userRole = User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Role)?.Value;
+
+                            @if (userRole == "Admin")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Index">Manage Bookings</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Admin/Classroom/ManageClassrooms">Manage Classrooms</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Bookings/Booking">View Bookings</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Bookings/Create">Create Booking</a>
+                                </li>
+                            }
+
                             <li class="nav-item">
                                 <form method="post" asp-area="" asp-page="/Account/Logout">
                                     <button type="submit" class="nav-link btn btn-danger text-white">Logout</button>
@@ -52,6 +68,7 @@
                             </li>
                         }
                     </ul>
+
                 </div>
             </div>
         </nav>
