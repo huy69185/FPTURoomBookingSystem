@@ -7,6 +7,29 @@
 <div class="container mt-4">
     <h2 class="mb-4 text-center">View Bookings Status</h2>
 
+
+    <!-- Search and Filter Form -->
+    <form method="get">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <input type="text" name="SearchTerm" value="@Model.SearchTerm" class="form-control" placeholder="Search by Classroom or Purpose">
+            </div>
+            <div class="col-md-3">
+                <select name="StatusFilter" class="form-control">
+                    <option value="">All Status</option>
+                    <option value="Approved" selected="@(Model.StatusFilter == "Approved" ? "selected" : null)">Approved</option>
+                    <option value="Denied" selected="@(Model.StatusFilter == "Denied" ? "selected" : null)">Denied</option>
+                    <option value="Pending" selected="@(Model.StatusFilter == "Pending" ? "selected" : null)">Pending</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary w-100">Search</button>
+            </div>
+        </div>
+    </form>
+
+
+
     <div class="card shadow-lg p-4">
         <table class="table table-hover table-striped text-center">
             <thead class="table-dark">
